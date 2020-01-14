@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 /**
- * ConsumeWebService
+ * ConsumeWebServiceController
  */
 @RestController
-public class ConsumeWebService {
+public class ConsumeWebServiceController {
 
     /**
      *  RestTemplate 객체
