@@ -1,11 +1,11 @@
 package com.example.demo.controller;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Collection;
 
-import com.example.demo.exception.ProductNotFoundException;
 import com.example.demo.model.Product;
+import com.example.demo.service.ProductService;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,20 +21,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProductServiceController {
 
     /**
-     * 레포지터리로 사용할 해쉬맵
+     * ProductService
      */
-    private static Map<String, Product> productRepo = new HashMap<>();
-
-    /**
-     * 레포지터리에 데이터를 초기화한다
-     */
-    static {
-        Product honey = new Product("1", "Honey");
-        productRepo.put(honey.getId(), honey);
-
-        Product almond = new Product("2", "Almond");
-        productRepo.put(almond.getId(), almond);
-    }
+    @Autowired
+    ProductService productService;
 
     /**
      * 상품 리스트를 취득한다
@@ -42,7 +32,8 @@ public class ProductServiceController {
      */
     @RequestMapping(value = "/products")
     public ResponseEntity<Object> getProducts() {
-        return new ResponseEntity<>(productRepo.values(), HttpStatus.OK);
+        Collection<Product> products = productService.getProducts();
+        return new ResponseEntity<>(products, HttpStatus.OK);
     }
 
     /**
@@ -52,7 +43,7 @@ public class ProductServiceController {
      */
     @RequestMapping(value = "/products", method = RequestMethod.POST)
     public ResponseEntity<Object> createProduct(@RequestBody Product product) {
-        productRepo.put(product.getId(), product);
+        productService.createProduct(product);
         return new ResponseEntity<>("Product is created successfully!", HttpStatus.OK);
     }
 
@@ -64,9 +55,7 @@ public class ProductServiceController {
      */
     @RequestMapping(value = "/products/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Object> updateProduct(@PathVariable String id, @RequestBody Product product) {
-        if (!productRepo.containsKey(id)) throw new ProductNotFoundException();
-        product.setId(id);
-        productRepo.replace(id, product);
+        productService.updateProduct(id, product);
         return new ResponseEntity<>("Product is updated successfully!", HttpStatus.OK);
     }
 
@@ -77,7 +66,7 @@ public class ProductServiceController {
      */
     @RequestMapping(value = "/products/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Object> deleteProduct(@PathVariable String id) {
-        productRepo.remove(id);
+        productService.deleteProduct(id);
         return new ResponseEntity<>("Product is deleted successfully!", HttpStatus.OK);
     }
 }
