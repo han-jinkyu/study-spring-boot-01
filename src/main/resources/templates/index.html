@@ -5,6 +5,17 @@
         <title>INDEX PAGE</title>
     </head>
     <body>
-        <h1>Hello world!</h1>
+        <div id="app">
+            <ol>
+                <li v-for="product in products" :key="product.id">
+                    {{ product.name }}
+                </li>
+            </ol>
+        </div>
+        
+        <!-- scripts -->
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script th:src="@{~/scripts/index.js}"></script>
     </body>
 </html>
