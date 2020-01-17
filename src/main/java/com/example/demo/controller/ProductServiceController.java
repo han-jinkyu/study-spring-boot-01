@@ -8,6 +8,7 @@ import com.example.demo.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,6 +32,9 @@ public class ProductServiceController {
      * @return 리스폰스 객체
      */
     @RequestMapping(value = "/products")
+    // Controller에서 CORS를 활성화하는 방법. CORS는 다른 곳에서 요청을 받아주는 것.
+    // CrossOrigin 애노테이션은 이 메소드만 부분 활성화하는 것.
+    @CrossOrigin(origins = "http://localhost:8080")
     public ResponseEntity<Object> getProducts() {
         Collection<Product> products = productService.getProducts();
         return new ResponseEntity<>(products, HttpStatus.OK);
