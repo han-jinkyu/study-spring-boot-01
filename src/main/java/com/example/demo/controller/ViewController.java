@@ -11,10 +11,19 @@ public class ViewController {
 
     /**
      * templates/index.html을 불러온다
-     * @return
+     * @return 파일명
      */
     @RequestMapping(value = "/index")
     public String index() {
         return "index";
+    }
+
+    /**
+     * templates/locale.html을 불러온다
+     * @return 파일명
+     */
+    @RequestMapping(value = "/locale")
+    public String locale() {
+        return "locale";
     }
 }
