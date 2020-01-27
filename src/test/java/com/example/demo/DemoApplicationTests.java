@@ -1,13 +1,7 @@
 package com.example.demo;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.when;
-
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.List;
 
 import com.example.demo.model.Product;
 import com.example.demo.service.ProductService;
@@ -38,17 +32,14 @@ public class DemoApplicationTests {
 	 * 상품 리스트를 얻은 경우 같은지
 	 */
 	@Test // JUnit5를 사용한다면 org.junit.jupiter.api.Test를 써야 한다!!!
-	public void when_get_products_then_products_equals() {
+	public void when_get_products_then_products_size_greater_than_zero() {
 		// given
-		Collection<Product> list = Arrays.asList(
-			new Product("1", "Honey"),
-			new Product("2", "Almond")
-		);
+		final int minSize = 1;
 
 		// when
 		Collection<Product> products = productService.getProducts();
 
 		// then
-		Assert.assertArrayEquals(list.toArray(), products.toArray());
+		Assert.assertFalse(products.size() < minSize);
 	}
 }
