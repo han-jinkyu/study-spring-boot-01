@@ -23,7 +23,8 @@ public class Product {
 
     /**
      * 생성자
-     * @param id 상품ID
+     * 
+     * @param id   상품ID
      * @param name 상품명
      */
     public Product(String id, String name) {
@@ -33,6 +34,7 @@ public class Product {
 
     /**
      * ID를 취득한다
+     * 
      * @return 상품ID
      */
     public String getId() {
@@ -41,6 +43,7 @@ public class Product {
 
     /**
      * ID를 저장한다
+     * 
      * @param id 저장할 ID
      */
     public void setId(String id) {
@@ -49,6 +52,7 @@ public class Product {
 
     /**
      * 이름을 취득한다
+     * 
      * @return 상품명
      */
     public String getName() {
@@ -57,10 +61,33 @@ public class Product {
 
     /**
      * 이름을 저장한다
+     * 
      * @param name 저장할 이름
      */
     public void setName(String name) {
         this.name = name;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+
+        if (!(obj instanceof Product)) {
+            return false;
+        }
+
+        Product cmp = (Product)obj;
+
+        if (this.id != cmp.getId()) {
+            return false;
+        }
+
+        if (this.name != cmp.getName()) {
+            return false;
+        }
+
+        return true;
+    }
 }
