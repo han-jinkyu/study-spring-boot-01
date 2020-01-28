@@ -58,7 +58,7 @@ public class ProductServiceController {
      * @return 갱신이 완료된 후의 리스폰스
      */
     @RequestMapping(value = "/products/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Object> updateProduct(@PathVariable String id, @RequestBody Product product) {
+    public ResponseEntity<Object> updateProduct(@PathVariable Long id, @RequestBody Product product) {
         productService.updateProduct(id, product);
         return new ResponseEntity<>("Product is updated successfully!", HttpStatus.OK);
     }
@@ -69,7 +69,7 @@ public class ProductServiceController {
      * @return 삭제가 완료된 후의 리스폰스
      */
     @RequestMapping(value = "/products/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<Object> deleteProduct(@PathVariable String id) {
+    public ResponseEntity<Object> deleteProduct(@PathVariable Long id) {
         productService.deleteProduct(id);
         return new ResponseEntity<>("Product is deleted successfully!", HttpStatus.OK);
     }

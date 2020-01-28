@@ -1,18 +1,32 @@
 package com.example.demo.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * 상품
  */
+@Entity
+@Table(name = "PRODUCT")
 public class Product {
 
     /**
      * 상품ID
      */
-    private String id;
+    @Id
+    // IDENTITY는 DB에게 위임하는 형식
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID")
+    private Long id;
 
     /**
      * 상품명
      */
+    @Column(name = "NAME", nullable = false)
     private String name;
 
     /**
@@ -27,7 +41,7 @@ public class Product {
      * @param id   상품ID
      * @param name 상품명
      */
-    public Product(String id, String name) {
+    public Product(Long id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -37,7 +51,7 @@ public class Product {
      * 
      * @return 상품ID
      */
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
@@ -46,7 +60,7 @@ public class Product {
      * 
      * @param id 저장할 ID
      */
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -68,6 +82,9 @@ public class Product {
         this.name = name;
     }
 
+    /**
+     * 상품을 비교한다
+     */
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -78,7 +95,7 @@ public class Product {
             return false;
         }
 
-        Product cmp = (Product)obj;
+        Product cmp = (Product) obj;
 
         if (this.id != cmp.getId()) {
             return false;
@@ -89,5 +106,13 @@ public class Product {
         }
 
         return true;
+    }
+
+    /**
+     * 스트링으로 변경한다
+     */
+    @Override
+    public String toString() {
+        return String.format("Product[id='%d', name='%s']", id, name);
     }
 }

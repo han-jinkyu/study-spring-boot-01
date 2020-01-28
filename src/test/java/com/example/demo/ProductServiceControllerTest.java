@@ -63,7 +63,7 @@ public class ProductServiceControllerTest extends AbstractTest {
     @Test
     public void createProduct() throws Exception {
         // 테스트에 사용할 상품 작성
-        Product product = new Product("3", "Ginger");
+        Product product = new Product(3L, "Ginger");
         String inputJson = super.mapToJson(product);
 
         // 목업 리퀘스트를 작성한다

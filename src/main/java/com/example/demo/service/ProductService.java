@@ -20,13 +20,13 @@ public interface ProductService {
      * @param id 갱신할 상품의 ID
      * @param product 갱신할 상품 정보
      */
-    public abstract void updateProduct(String id, Product product);
+    public abstract void updateProduct(Long id, Product product);
 
     /**
      * 상품을 삭제한다
      * @param id 삭제할 상품의 ID
      */
-    public abstract void deleteProduct(String id);
+    public abstract void deleteProduct(Long id);
 
     /**
      * 상품 리스트를 취득한다
