@@ -26,4 +26,13 @@ public class ViewController {
     public String locale() {
         return "locale";
     }
+
+    /**
+     * templates/user/index.html을 불러온다
+     * @return 파일명
+     */
+    @RequestMapping(value = "/user/index")
+    public String userIndex() {
+        return "user/index";
+    }
 }
